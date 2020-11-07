@@ -21,7 +21,12 @@ vector<string> splitLine(string inputLine) {
 
 void printAllClasses(vector<vector<string>>* classes){
     for (int i = 0; i < classes->size(); i ++){
-        cout << "Class: " << classes->at(i).at(0) << " Prerequisities: " << classes->at(i).at(1) << endl;
+        if(classes->at(i).at(1).size() < 2){
+            cout << "Class: " << classes->at(i).at(0) << " Prerequisities: None" << endl;
+        }
+        else{
+            cout << "Class: " << classes->at(i).at(0) << " Prerequisities: " << classes->at(i).at(1) << endl;
+        }
     }
     cout << endl;
 }
@@ -102,6 +107,5 @@ int main () {
         cout << endl;
     }
     
-
    return 0;
 }
