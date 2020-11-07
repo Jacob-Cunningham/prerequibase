@@ -11,11 +11,12 @@ vector<string> splitLine(string inputLine) {
     int findIndex = 0;
 
     while(tempString.find(',') != string::npos) {
-        findIndex = tempString.find(',', findIndex) - 1;
-        tempVector.push_back(tempString.substr(0, findIndex))
-        tempString.replace(0, findIndex + 1);
+        findIndex = tempString.find(',', findIndex);
+        tempVector.push_back(tempString.substr(0, findIndex));
+        tempString.replace(0, findIndex, "");
     }
 
+    return tempVector;
 }
 
 int main () {
@@ -25,7 +26,7 @@ int main () {
     getline(classList, currentClass);
 
     while (currentClass != "end") {
-        cout << currentClass << endl;
+        cout << splitLine(currentClass).at(0) << endl;
         getline(classList, currentClass);
     }
     classList.close();
