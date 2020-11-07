@@ -11,29 +11,34 @@ vector<string> splitLine(string inputLine) {
     int findIndex = 0;
 
     while(tempString.find(',') != string::npos) {
-        findIndex = tempString.find(',', findIndex);
+        findIndex = tempString.find(',');
         tempVector.push_back(tempString.substr(0, findIndex));
-        tempString.replace(0, findIndex, "");
+        tempString.replace(0, findIndex + 1, "");
     }
 
     return tempVector;
 }
 
-int main () {
+vector<vector<string>> makeClassVector(){
+    vector<vector<string>> finalVector;
     string currentClass;
     ifstream classList;
     classList.open("listOfClasses.txt", ios::in | ios::app); //opens text file and allows input to program
     getline(classList, currentClass);
 
     while (currentClass != "end") {
-        cout << splitLine(currentClass).at(0) << endl;
+        finalVector.push_back(splitLine(currentClass));
         getline(classList, currentClass);
     }
     classList.close();
+    return finalVector;
+}
 
+int main () {
+    vector<vector<string>> classList;
+    classList = makeClassVector();
+    cout << classList.at(0).at(0) << endl;
 
-
-   return 0;
 
     return 0;
 }
