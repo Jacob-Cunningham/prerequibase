@@ -19,19 +19,38 @@ vector<string> splitLine(string inputLine) {
     return tempVector;
 }
 
-void printAllClasses(vector<vector<string>> classes){
-    for (int i = 0; i < classes.size(); i ++){
-        for (int j = 0; j < classes.at(i).size(); j ++){
-            //says the class then prerequisites
-            if (j == 0){
-                cout << "Class: " << classes.at(i).at(j) << "Prerequisities: ";
-            }
-            else{
-                cout << classes.at(i).at(j) << " ";
-            }
-        }
+void printAllClasses(vector<vector<string>>* classes){
+    for (int i = 0; i < classes->size(); i ++){
+        cout << "Class: " << classes->at(i).at(0) << " Prerequisities: " << classes->at(i).at(1) << endl;
     }
     cout << endl;
+}
+
+void printCompletedClasses(vector<string>* completedClasses){
+    cout << "the classes you have completed are: ";
+    for(int i = 0; i < completedClasses->size(); i ++){
+        cout << completedClasses->at(i);
+    }
+    cout << endl;
+}
+
+void addCompletedClass(string cls, vector<vector<string>> *classList, vector<string>* completedClasses){
+    int index = 0;
+    bool isInClassList = false;
+    while (index < classList->size()){
+        if (classList->at(index).at(0) == cls){
+            isInClassList = true;
+        }
+        index ++;
+    }
+
+    if (isInClassList){
+        cout << "added" << endl;
+        completedClasses->push_back(cls);
+    }
+    else{
+        cout << "Class not found" << endl;
+    }
 }
 
 vector<vector<string>> makeClassVector(){
@@ -50,10 +69,39 @@ vector<vector<string>> makeClassVector(){
 }
 
 int main () {
+
     vector<vector<string>> classList;
+    vector<string> completedClasses;
     classList = makeClassVector();
-    cout << classList.at(0).at(0) << endl;
+    string command;
+    string input;
 
+    while(1){
+        cout << "enter a command. Type help for a list of the commands" << endl;
+        cin >> command;
+        if (command == "help"){
+            cout << "Commands are printClasses, addCompletedClasses, and WhatClassesCanITake" << endl;
+        }
+        else if (command == "printClasses"){
+            printAllClasses(&classList);
+        }
+        else if (command == "addCompletedClasses"){
+            cout << "enter a class name" << endl;
+            cin >> input;
+            addCompletedClass(input, &classList, &completedClasses);
+            printCompletedClasses(&completedClasses);
+            cout << endl;
+        }
+        else if (command == "WhatClassesCanITake"){
+            //TODO, Create a function that goes through every class and checks if all of its prerequisites
+            //are in completedClasses. If they are, then print the class
+        }
+        else{
+            cout << "not a valid command. " << endl;
+        }
+        cout << endl;
+    }
+    
 
-    return 0;
+   return 0;
 }
