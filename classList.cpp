@@ -19,6 +19,21 @@ vector<string> splitLine(string inputLine) {
     return tempVector;
 }
 
+void printAllClasses(vector<vector<string>> classes){
+    for (int i = 0; i < classes.size(); i ++){
+        for (int j = 0; j < classes.at(i).size(); j ++){
+            //says the class then prerequisites
+            if (j == 0){
+                cout << "Class: " << classes.at(i).at(j) << "Prerequisities: ";
+            }
+            else{
+                cout << classes.at(i).at(j) << " ";
+            }
+        }
+    }
+    cout << endl;
+}
+
 vector<vector<string>> makeClassVector(){
     vector<vector<string>> finalVector;
     string currentClass;
