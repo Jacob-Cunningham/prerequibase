@@ -37,23 +37,46 @@ void printAllClasses(vector<vector<string>> classes){
 vector<vector<string>> makeClassVector(){
     vector<vector<string>> finalVector;
     string currentClass;
+    string nextClass;
     ifstream classList;
     classList.open("listOfClasses.txt", ios::in | ios::app); //opens text file and allows input to program
     getline(classList, currentClass);
+    getline(classList, nextClass);
 
-    while (currentClass != "end") {
+    while (currentClass != nextClass) {
         finalVector.push_back(splitLine(currentClass));
-        getline(classList, currentClass);
+        currentClass = nextClass;
+        getline(classList, nextClass);
     }
+    finalVector.push_back(splitLine(currentClass)); //the while loop prints all but the last item, this corrects that
     classList.close();
     return finalVector;
+}
+
+void saveClassInFile() {
+    string userString;
+    ofstream classList;
+    classList.open("listOfClasses.txt", ios::out | ios::app);
+
+    cout << "Class name?" << endl;
+    getline(cin, userString);
+    classList << userString + ',';
+    cout << "Enter any prerequisite classes one at a time. Type done to finish" << endl;
+    getline(cin, userString);
+    while(userString != "done") {
+        classList << userString + ',';
+        getline(cin, userString);
+    }
+    classList << endl;
+    cout << "Thank you" << endl;
+    
+    classList.close();
 }
 
 int main () {
     vector<vector<string>> classList;
     classList = makeClassVector();
-    cout << classList.at(0).at(0) << endl;
-
+    cout << classList.at(2).at(0);
 
     return 0;
 }
