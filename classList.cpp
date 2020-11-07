@@ -24,7 +24,7 @@ int main () {
     ifstream classList;
     classList.open("listOfClasses.txt", ios::in | ios::app);
     getline(classList, currentClass);
-
+// this working?
     while (currentClass != "end") {
         cout << splitLine(currentClass).at(0) << endl;
         getline(classList, currentClass);
