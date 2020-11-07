@@ -22,7 +22,7 @@ vector<string> splitLine(string inputLine) {
 int main () {
     string currentClass;
     ifstream classList;
-    classList.open("listOfClasses.txt", ios::in | ios::app);
+    classList.open("listOfClasses.txt", ios::in | ios::app); //opens text file and allows input to program
     getline(classList, currentClass);
 
     while (currentClass != "end") {
