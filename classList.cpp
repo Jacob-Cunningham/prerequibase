@@ -8,13 +8,14 @@ using namespace std;
 int main () {
     string currentClass;
     ifstream classList;
-    classList.open("listOfClasses", ios::in | ios::app);
+    classList.open("listOfClasses.txt", ios::in | ios::app);
     getline(classList, currentClass);
 
     while (currentClass != "end") {
-
+        cout << currentClass << endl;
+        getline(classList, currentClass);
     }
-    
+    classList.close();
 
 
 
