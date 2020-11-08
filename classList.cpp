@@ -81,7 +81,7 @@ void saveClassInFile() {
     string userString;
     ofstream classList;
     classList.open("listOfClasses.txt", ios::out | ios::app);
-
+    getline(cin, userString); //clear the input buffer
     cout << "Class name?" << endl;
     
     classList << userString + ',';
@@ -94,7 +94,7 @@ void saveClassInFile() {
         classList << userString + ' ';
         getline(cin, userString);
     }
-    classList << endl;
+    classList << ',' << endl;
     cout << "Thank you" << endl;
     
     classList.close();
@@ -125,9 +125,10 @@ int main () {
         cin >> command;
 
         if (command == "help"){
-            cout << "Commands are printClasses, addCompletedClasses, and whatClassesCanITake" << endl;
+            cout << "Commands are addClassToList, printClasses, addCompletedClasses, and whatClassesCanITake" << endl;
         }
-        else if (command == "AddClassToClassList"){
+        else if (command == "addClassToList"){
+
             saveClassInFile();
             makeClassVector();
         }
@@ -142,7 +143,7 @@ int main () {
             cout << endl;
 
         }
-        else if (command == "WhatClassesCanITake"){
+        else if (command == "whatClassesCanITake"){
             //TODO, Create a function that goes through every class and checks if all of its prerequisites
             //are in completedClasses. If they are, then print the class
         }
@@ -151,6 +152,7 @@ int main () {
         }
         cout << endl;
     }
+
     
    return 0;
 }
