@@ -87,8 +87,11 @@ void saveClassInFile() {
     classList << userString + ',';
     cout << "Enter any prerequisite classes one at a time. Type done to finish" << endl;
     getline(cin, userString);
+    if (userString == "done") {
+        classList << ',';
+    }
     while(userString != "done") {
-        classList << userString + ',';
+        classList << userString + ' ';
         getline(cin, userString);
     }
     classList << endl;
