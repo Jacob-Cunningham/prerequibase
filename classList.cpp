@@ -5,7 +5,39 @@
 
 using namespace std;
 
+
+bool isIn(vector<string> list, string a){
+    bool isIn = false;
+    for (int i = 0; i < list.size(); i ++){
+        if (list.at(i) == a){
+            isIn = true;
+        }
+    }
+    return isIn;
+}
+
+void checkForClassesToTake(vector<vector<string>>* classList, vector<string> completedClasses){
+
+    cout << "You can take: ";
+    for(int i = 0; i < classList->size(); i ++){
+        bool qualified = true;
+        //if class has not been completed
+        if(!isIn(completedClasses, classList->at(i).at(0))){
+            //for classList->at(i)'s prerequisites{
+                //if !(isIn(completedClasses, classList->at(i)'s prerequisite)){
+                    //qualified = false;
+                
+        }
+        if (qualified){
+            cout << classList->at(i).at(0) << " ";
+        }
+    }
+    cout << endl;
+}
+
+
 vector<string> splitLine(string inputLine, char splitChar) {
+
     vector<string> tempVector;
     string tempString = inputLine;
     int findIndex = 0;
@@ -144,8 +176,7 @@ int main () {
 
         }
         else if (command == "whatClassesCanITake"){
-            //TODO, Create a function that goes through every class and checks if all of its prerequisites
-            //are in completedClasses. If they are, then print the class
+            checkForClassesToTake(&classList, completedClasses);
         }
         else{
             cout << "not a valid command. " << endl;
