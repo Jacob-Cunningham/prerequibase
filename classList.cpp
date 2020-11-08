@@ -19,7 +19,6 @@ vector<string> splitLine(string inputLine) {
     return tempVector;
 }
 
-//needs to be changed
 void printAllClasses(vector<vector<string>>* classes){
     for (int i = 0; i < classes->size(); i ++){
         if(classes->at(i).at(1).size() < 2){
@@ -40,7 +39,6 @@ void printCompletedClasses(vector<string>* completedClasses){
     cout << endl;
 }
 
-//needs to be changed 
 void addCompletedClass(string cls, vector<vector<string>> *classList, vector<string>* completedClasses){
     int index = 0;
     bool isInClassList = false;
@@ -85,7 +83,7 @@ void saveClassInFile() {
     classList.open("listOfClasses.txt", ios::out | ios::app);
 
     cout << "Class name?" << endl;
-    getline(cin, userString);
+    
     classList << userString + ',';
     cout << "Enter any prerequisite classes one at a time. Type done to finish" << endl;
     getline(cin, userString);
@@ -111,15 +109,27 @@ int main () {
     string command;
     string input;
 
+    cout << "Hello fellow Computer Science Student at UCR" << endl;
+    cout << "Our application keeps track of all of the classes" << endl;
+    cout << "required for your major and their prerequisites." << endl << endl;
+
+    cout << "Enter the classes you have completed, and the program will keep track" << endl;
+    cout << "of them to determine which classes you are qualified to take." << endl;
+
+    cout << "If you have any other classes that you would like to complete," << endl;
+    cout << "feel free to add them and any prerequisites for taking the class." << endl;
+
+
     while(1){
         cout << "enter a command. Type help for a list of the commands" << endl;
         cin >> command;
 
         if (command == "help"){
-            cout << "Commands are printClasses, addCompletedClasses, and WhatClassesCanITake" << endl;
+            cout << "Commands are printClasses, addCompletedClasses, and whatClassesCanITake" << endl;
         }
-        else if (command == "AddClassTOClassList"){
+        else if (command == "AddClassToClassList"){
             saveClassInFile();
+            makeClassVector();
         }
         else if (command == "printClasses"){
             printAllClasses(&classList);
@@ -130,6 +140,7 @@ int main () {
             addCompletedClass(input, &classList, &completedClasses);
             printCompletedClasses(&completedClasses);
             cout << endl;
+
         }
         else if (command == "WhatClassesCanITake"){
             //TODO, Create a function that goes through every class and checks if all of its prerequisites
