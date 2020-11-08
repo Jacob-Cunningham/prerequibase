@@ -125,9 +125,10 @@ void saveClassInFile() {
     classList.open("listOfClasses.txt", ios::out | ios::app);
     getline(cin, userString); //clear the input buffer
     cout << "Class name?" << endl;
-    
+
     getline(cin, userString);
     classList << endl << userString + ',';
+
     cout << "Enter any prerequisite classes one at a time. Type done to finish" << endl;
     getline(cin, userString);
     if (userString == "done") {
@@ -171,7 +172,14 @@ int main () {
         cin >> command;
 
         if (command == "help"){
+
             cout << "Commands are: printClasses, enterCompletedClass, whatClassesCanITake, and addAClass" << endl;
+        }
+        else if (command == "addClassToList"){
+
+            saveClassInFile();
+            classList = makeClassVector();
+
         }
         else if (command == "printClasses"){
             printAllClasses(&classList);
