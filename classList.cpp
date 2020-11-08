@@ -16,28 +16,8 @@ bool isIn(vector<string> list, string a){
     return isIn;
 }
 
-void checkForClassesToTake(vector<vector<string>>* classList, vector<string> completedClasses){
-
-    cout << "You can take: ";
-    for(int i = 0; i < classList->size(); i ++){
-        bool qualified = true;
-        //if class has not been completed
-        if(!isIn(completedClasses, classList->at(i).at(0))){
-            //for classList->at(i)'s prerequisites{
-                //if !(isIn(completedClasses, classList->at(i)'s prerequisite)){
-                    //qualified = false;
-                
-        }
-        if (qualified){
-            cout << classList->at(i).at(0) << " ";
-        }
-    }
-    cout << endl;
-}
-
 
 vector<string> splitLine(string inputLine, char splitChar) {
-
     vector<string> tempVector;
     string tempString = inputLine;
     int findIndex = 0;
@@ -71,6 +51,36 @@ void printCompletedClasses(vector<string>* completedClasses){
     cout << endl;
 }
 
+void checkForClassesToTake(vector<vector<string>>* classList, vector<string> completedClasses){
+
+    cout << "You can take: ";
+    for(int i = 0; i < classList->size(); i ++){
+        bool qualified = true;
+        //if class has not been completed
+        if(!isIn(completedClasses, classList->at(i).at(0))){
+            //for classList->at(i)'s prerequisites{
+            vector<string> prerequisites;
+            prerequisites = splitLine(classList->at(i).at(1), ' ');
+            for (int i = 0; i < prerequisites.size(); i ++){
+                //if !(isIn(completedClasses, classList->at(i)'s prerequisite)){
+                if (!isIn(completedClasses, prerequisites.at(i))){
+                    qualified = false;
+                }
+            }
+        }
+        else{
+            qualified = false;
+        }
+
+        if (qualified){
+            cout << classList->at(i).at(0) << " ";
+        }
+    }
+    cout << endl;
+}
+
+
+
 void addCompletedClass(string cls, vector<vector<string>> *classList, vector<string>* completedClasses){
     int index = 0;
     bool isInClassList = false;
@@ -82,11 +92,11 @@ void addCompletedClass(string cls, vector<vector<string>> *classList, vector<str
     }
 
     if (isInClassList){
-        cout << "added" << endl;
+        cout << "Thank you" << endl;
         completedClasses->push_back(cls);
     }
     else{
-        cout << "Class not found" << endl;
+        cout << "ERROR: Class not found" << endl;
     }
 }
 
@@ -115,8 +125,10 @@ void saveClassInFile() {
     classList.open("listOfClasses.txt", ios::out | ios::app);
     getline(cin, userString); //clear the input buffer
     cout << "Class name?" << endl;
+
     getline(cin, userString);
-    classList << userString + ',';
+    classList << endl << userString + ',';
+
     cout << "Enter any prerequisite classes one at a time. Type done to finish" << endl;
     getline(cin, userString);
     if (userString == "done") {
@@ -126,7 +138,7 @@ void saveClassInFile() {
         classList << userString + ' ';
         getline(cin, userString);
     }
-    classList << ',' << endl;
+    classList << ',' ;
     cout << "Thank you" << endl;
     
     classList.close();
@@ -145,46 +157,52 @@ int main () {
     cout << "Our application keeps track of all of the classes" << endl;
     cout << "required for your major and their prerequisites." << endl << endl;
 
+
     cout << "Enter the classes you have completed, and the program will keep track" << endl;
-    cout << "of them to determine which classes you are qualified to take." << endl;
+    cout << "of them to determine which classes you are qualified to take." << endl << endl;
 
     cout << "If you have any other classes that you would like to complete," << endl;
-    cout << "feel free to add them and any prerequisites for taking the class." << endl;
+    cout << "feel free to add them and any prerequisites for taking the class.";
+    cout << endl << endl;
+
 
 
     while(1){
-        cout << "enter a command. Type help for a list of the commands" << endl;
+        cout <<  "enter a command. Type help for a list of the commands" << endl;
         cin >> command;
 
         if (command == "help"){
-            cout << "Commands are addClassToList, printClasses, addCompletedClasses, and whatClassesCanITake" << endl;
+
+            cout << "Commands are: printClasses, enterCompletedClass, whatClassesCanITake, and addAClass" << endl;
         }
         else if (command == "addClassToList"){
 
             saveClassInFile();
             classList = makeClassVector();
+
         }
         else if (command == "printClasses"){
             printAllClasses(&classList);
         }
-        else if (command == "addCompletedClasses"){
-            cout << "enter a class name" << endl;
+        else if (command == "enterCompletedClass"){
+            cout << "Class name?" << endl;
             cin >> input;
             addCompletedClass(input, &classList, &completedClasses);
-            printCompletedClasses(&completedClasses);
             cout << endl;
 
         }
         else if (command == "whatClassesCanITake"){
             checkForClassesToTake(&classList, completedClasses);
         }
+        else if (command == "addAClass"){
+            saveClassInFile();
+            classList = makeClassVector();
+        }
         else{
             cout << "not a valid command. " << endl;
         }
         cout << endl;
     }
-
-    
    return 0;
 }
 
