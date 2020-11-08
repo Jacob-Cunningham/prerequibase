@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 bool isIn(vector<string> list, string a){
     bool isIn = false;
     for (int i = 0; i < list.size(); i ++){
@@ -35,14 +36,14 @@ void checkForClassesToTake(vector<vector<string>>* classList, vector<string> com
 }
 
 
+vector<string> splitLine(string inputLine, char splitChar) {
 
-vector<string> splitLine(string inputLine) {
     vector<string> tempVector;
     string tempString = inputLine;
     int findIndex = 0;
 
-    while(tempString.find(',') != string::npos) {
-        findIndex = tempString.find(',');
+    while(tempString.find(splitChar) != string::npos) {
+        findIndex = tempString.find(splitChar);
         tempVector.push_back(tempString.substr(0, findIndex));
         tempString.replace(0, findIndex + 1, "");
     }
@@ -99,11 +100,11 @@ vector<vector<string>> makeClassVector(){
     getline(classList, nextClass);
 
     while (currentClass != nextClass) {
-        finalVector.push_back(splitLine(currentClass));
+        finalVector.push_back(splitLine(currentClass, ','));
         currentClass = nextClass;
         getline(classList, nextClass);
     }
-    finalVector.push_back(splitLine(currentClass)); //the while loop prints all but the last item, this corrects that
+    finalVector.push_back(splitLine(currentClass, ',')); //the while loop prints all but the last item, this corrects that
     classList.close();
     return finalVector;
 }
