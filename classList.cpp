@@ -19,6 +19,7 @@ vector<string> splitLine(string inputLine) {
     return tempVector;
 }
 
+//needs to be changed
 void printAllClasses(vector<vector<string>>* classes){
     for (int i = 0; i < classes->size(); i ++){
         if(classes->at(i).at(1).size() < 2){
@@ -39,6 +40,7 @@ void printCompletedClasses(vector<string>* completedClasses){
     cout << endl;
 }
 
+//needs to be changed 
 void addCompletedClass(string cls, vector<vector<string>> *classList, vector<string>* completedClasses){
     int index = 0;
     bool isInClassList = false;
@@ -112,8 +114,12 @@ int main () {
     while(1){
         cout << "enter a command. Type help for a list of the commands" << endl;
         cin >> command;
+
         if (command == "help"){
             cout << "Commands are printClasses, addCompletedClasses, and WhatClassesCanITake" << endl;
+        }
+        else if (command == "AddClassTOClassList"){
+            saveClassInFile();
         }
         else if (command == "printClasses"){
             printAllClasses(&classList);
@@ -138,3 +144,4 @@ int main () {
     
    return 0;
 }
+
