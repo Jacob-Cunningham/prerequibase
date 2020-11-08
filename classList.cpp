@@ -161,6 +161,7 @@ int main () {
     cout << "Enter the classes you have completed, and the program will keep track" << endl;
     cout << "of them to determine which classes you are qualified to take." << endl << endl;
 
+
     cout << "If you have any other classes that you would like to complete," << endl;
     cout << "feel free to add them and any prerequisites for taking the class.";
     cout << endl << endl;
