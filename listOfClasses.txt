@@ -19,3 +19,5 @@ CS150, CS10C, CS111,
 CS152, CS61, CS100, CS111, CS150,
 CS153, CS61, CS100, CS111,
 CS161, CS120A,
+temporaryClass,temporaryPre tempPre2 
+asdflh,gfea agfbr 

@@ -94,7 +94,7 @@ void saveClassInFile() {
         classList << userString + ' ';
         getline(cin, userString);
     }
-    classList << endl;
+    classList << ',' << endl;
     cout << "Thank you" << endl;
     
     classList.close();
@@ -134,6 +134,7 @@ int main () {
         }
         cout << endl;
     }
+
     
    return 0;
 }
